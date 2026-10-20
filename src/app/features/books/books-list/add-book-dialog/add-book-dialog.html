@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Dodaj książkę</h2>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>Tytuł</mat-label>
+    <input #titleModel="ngModel" matInput required type="text" [(ngModel)]="data.title" />
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Data spotkania</mat-label>
+    <input #dateModel="ngModel" matInput [matDatepicker]="picker" [(ngModel)]="data.meetingDate" required>
+    <!-- <mat-hint>YYYY-MM-DD</mat-hint> -->
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton [disabled]="titleModel.invalid || dateModel.invalid" 
+  [mat-dialog-close]="{title: data.title, meetingDate: data.meetingDate}" cdkFocusInitial>Dodaj</button>
+</mat-dialog-actions>

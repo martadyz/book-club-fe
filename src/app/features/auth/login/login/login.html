@@ -1,0 +1,29 @@
+
+@if (authStore.loading()) {
+        <div class="wrap-loader">
+            <img src="/assets/book_loader.svg" alt="Loading..." class="image-loader">
+        </div>
+    }
+    
+@if (authStore.error()) {
+    <p>{{ authStore.error() }}</p>
+}
+
+<div class="login-content">
+    <h1 class="head-h1">Logowanie</h1>
+    <form (submit)="login(); $event.preventDefault()" class="login-form">
+        <mat-form-field class="login-full-width">
+            <mat-label>Username</mat-label>
+            <input type="text" matInput [formField]="usernameForm">
+        </mat-form-field>
+
+        <mat-form-field class="login-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [formField]="passwordForm">
+        </mat-form-field>
+        <div class="button-row">
+            <button matButton="filled" color="primary" type="submit" [disabled]="authStore.loading()">Zaloguj się</button>
+        </div>
+    </form>
+</div>
+

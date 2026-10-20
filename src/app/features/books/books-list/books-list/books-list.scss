@@ -1,0 +1,77 @@
+:host {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.add-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.grid-list-custom {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 12px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgb(15 23 42 / 6%);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        border-color: #c7d2fe;
+        box-shadow: 0 5px 12px rgb(15 23 42 / 10%);
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.member-name {
+    color: #334155;
+    font-weight: 500;
+}
+
+.member-rating {
+    display: grid;
+    place-items: center;
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0 8px;
+    border-radius: 999px;
+    color: #475569;
+    font-weight: 700;
+}
+
+.bad {
+    color: #b91c1c;
+}
+
+.ok {
+    color: #be6c38;
+}
+
+.great {
+    
+    color: #e9ce57;
+}
+
+.fan {
+   
+    color: #8ccf60;
+}

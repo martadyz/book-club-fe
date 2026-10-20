@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Oceń tę książkę</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Ocena</mat-label>
+    <input #scoreModel="ngModel" matInput required [min]="1" [max]="10" type="number" [(ngModel)]="data.score" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton [disabled]="scoreModel.invalid" [mat-dialog-close]="data.score" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
