@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Book } from "../models/book.model";
+import { AddBookDialogData, Book, BookSort } from "../models/book.model";
 import { environment } from "../../../environments/environment.production";
 import { Observable } from "rxjs";
 
@@ -13,12 +13,16 @@ export class BooksApi {
   private readonly apiUrl =
     `${environment.apiUrl}/books`;
 
-  getBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}`);
+  getBooks(sort: BookSort): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.apiUrl}?sort=${sort.field},${sort.direction}`);
   }
 
   getBook(id: number): Observable<Book> {
     return this.http.get<Book>(
       `${this.apiUrl}/${id}`);
+  }
+
+  addBook(book: AddBookDialogData): Observable<AddBookDialogData> {
+    return this.http.post<AddBookDialogData>(`${this.apiUrl}`, book);
   }
 }

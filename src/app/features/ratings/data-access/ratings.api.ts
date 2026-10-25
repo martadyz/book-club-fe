@@ -23,4 +23,18 @@ export class RatingsApi {
           { bookId, score }
         );
       }
+
+      rateBookByAdmin(bookId: number, score: number, memberId: number): Observable<void> {
+        return this.http.post<void>(
+          `${this.apiUrl}/admin`,
+          { memberId, bookId, score }
+        );
+      }
+    
+      updateRateBookByAdmin(bookId: number, score: number, memberId: number): Observable<void> {
+        return this.http.put<void>(
+          `${this.apiUrl}/admin`,
+          {memberId, bookId, score }
+        );
+      }
 }

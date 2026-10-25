@@ -1,6 +1,6 @@
 
     <h1 class="head-h1">Książki i spotkania</h1>
-    @if (bookStore.loading() || bookStore.savingRating()) {
+    @if (bookStore.loading() || ratingsStore.loading()) {
         <div class="wrap-loader">
             <img src="/assets/book_loader.svg" alt="Loading..." class="image-loader">
         </div>
@@ -12,6 +12,8 @@
     <div class="add-button">
         <button matButton="filled" color="primary" (click)="openAddBookDialog()">Dodaj książkę</button>
     </div>
+    <app-books-sort [sort]="bookStore.sort()" 
+    (sortChange)="bookStore.setSort($event)"></app-books-sort>
     <mat-accordion>
         @for (book of bookStore.books(); track book.id; let first = $first) {
             <mat-expansion-panel [expanded]="first" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -34,9 +36,9 @@
                                 <p class="member-rating" [appRatingClass]="rating ?? 0">
                                     {{ rating > 0 ? rating : '-' }}
                                 </p> 
-                                @if (authStore.userId() === member.id) {
+                                @if (authStore.userId() === member.id || authStore.isAdmin()) {
                                     <mat-icon aria-hidden="false" 
-                                    aria-label="Edit" fontIcon="edit" (click)="openRatingDialog(book.id, rating)">
+                                    aria-label="Edit" fontIcon="edit" (click)="openRatingDialog(book.id, rating, member.id)">
                                     </mat-icon>
                                      
                                 }

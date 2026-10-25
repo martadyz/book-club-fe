@@ -1,0 +1,28 @@
+<div class="sort-container">
+    <span class="sort-header">Sortuj:</span> 
+    <div>
+        <span>Data spotkania: </span>
+        <button matButton (click)="onSortChange('meetingDate', 'asc')">
+            rosnąco
+        </button>
+        <button matButton 
+        (click)="onSortChange('meetingDate', 'desc')">
+            malejąco
+        </button>
+    </div>
+    
+    <div>
+        <span>Średnia ocena: </span>
+        <button matButton
+                (click)="onSortChange('averageRating', 'asc')">
+            rosnąco        
+        </button>
+         <button matButton
+                (click)="onSortChange('averageRating', 'desc')">
+            malejąco        
+        </button>
+    </div>
+    
+    
+
+</div>

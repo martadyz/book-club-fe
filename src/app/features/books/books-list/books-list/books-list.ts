@@ -8,13 +8,16 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatAccordion, MatExpansionModule } from "@angular/material/expansion";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { RatingClassDirective } from "../../../../shared/directives/rating-class.directive";
-import { DatePipe } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { MembersStore } from "../../../members/data-access/members.store";
 import { Book } from "../../models/book.model";
 import { MatDialog } from "@angular/material/dialog";
 import { BookRatingDialog } from "../book-rating-dialog/book-rating-dialog";
 import { RatingsStore } from "../../../ratings/data-access/ratings.store";
 import { AddBookDialog } from "../add-book-dialog/add-book-dialog";
+import '@angular/common/locales/global/pl';
+import { NumberInput } from "@angular/cdk/coercion";
+import { BooksSort } from '../books-sort/books-sort';
 
 @Component({
   selector: 'app-books-list',
@@ -30,7 +33,8 @@ import { AddBookDialog } from "../add-book-dialog/add-book-dialog";
     MatProgressSpinnerModule,
     MatAccordion,
     RatingClassDirective,
-    DatePipe
+    DatePipe,
+    BooksSort
   ],
   providers: [BooksStore, MembersStore, RatingsStore],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -43,12 +47,12 @@ export class BooksListComponent implements OnInit {
   readonly dialog = inject(MatDialog);
   readonly panelOpenState = signal(false);
 
-  saveRating(bookId: number, score: number): void {
-    this.ratingsStore.rateBook(bookId, score);
+  saveRating(bookId: number, score: number, memberId?: number): void {
+    this.ratingsStore.rateBook(bookId, score, memberId);
   }
 
-  updateRating(bookId: number, score: number): void {
-    this.ratingsStore.updateRateBook(bookId, score);
+  updateRating(bookId: number, score: number, memberId?: number): void {
+    this.ratingsStore.updateRateBook(bookId, score, memberId);
   }
 
   openAddBookDialog(): void {
@@ -57,12 +61,15 @@ export class BooksListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
+      this.bookStore.addBook({
+        title: result.title,
+        meetingDate:  formatDate(result.meetingDate, 'yyyy-MM-dd', 'pl-PL')
+      }); 
     });
 
   }
 
-  openRatingDialog(bookId: number, score: number): void {
+  openRatingDialog(bookId: number, score: number, memberId?: number): void {
     const dialogRef = this.dialog.open(BookRatingDialog, {
       data: { score },
     });
@@ -70,9 +77,9 @@ export class BooksListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (score !== 0) {
-          this.updateRating(bookId, result);
+          this.updateRating(bookId, result, memberId);
         } else {
-          this.saveRating(bookId, result);
+          this.saveRating(bookId, result, memberId);
         }
       }
     });
@@ -84,8 +91,9 @@ export class BooksListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookStore.loadBooks();
+   // this.bookStore.loadBooks();
     this.membersStore.loadMembers();
+    console.log(this.authStore.isAdmin());
   }
 
 }

@@ -19,12 +19,5 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/books/books-list/books-list/books-list')
         .then(m => m.BooksListComponent)
-  },
-//   {
-//     path: 'admin',
-//     canActivate: [adminGuard],
-//     loadChildren: () =>
-//       import('./features/admin/admin.routes')
-//         .then(m => m.ADMIN_ROUTES)
-//   }
+  }
 ];

@@ -18,3 +18,14 @@ export interface AddBookDialogData {
   title: string;
   meetingDate: string;
 }
+
+export type BookSortField = 
+  | 'meetingDate'
+  | 'averageRating';
+
+export type SortDirection = 'asc' | 'desc';
+
+export interface BookSort {
+  field: BookSortField;
+  direction: SortDirection;
+}

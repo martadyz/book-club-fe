@@ -3,11 +3,12 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { catchError, delay, finalize, map, Observable, of, tap } from 'rxjs';
 
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 export interface CurrentUser {
   id: number;
   username: string;
-  role: 'USER' | 'ADMIN';
+  role: 'ROLE_USER' | 'ROLE_ADMIN';
 }
 
 export type AuthStatus =
@@ -20,7 +21,7 @@ export type AuthStatus =
 })
 export class AuthStore {
   private readonly authService = inject(AuthService);
-
+  private readonly router = inject(Router);
   private readonly _user = signal<CurrentUser | null>(null);
   private readonly _userId = signal<number | null>(null);
   private readonly _status = signal<AuthStatus>('unknown');
@@ -38,7 +39,7 @@ export class AuthStore {
   );
 
   readonly isAdmin = computed(
-    () => this._user()?.role === 'ADMIN'
+    () => this._user()?.role.includes('ADMIN')
   );
 
   loadCurrentUser() {
@@ -123,15 +124,20 @@ export class AuthStore {
   }
 
   logout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.clearSession();
-      }
+    this._loading.set(true);
+    this._error.set(null);
+    this.authService.logout()
+      .pipe(
+        finalize(() => this._loading.set(false))
+      )
+      .subscribe({
+        next: () => {
+          this._user.set(null);
+          this._status.set('unauthenticated'); 
+          this.router.navigate([
+            '/login'
+          ]);
+        }
     });
-  }
-
-  clearSession(): void {
-    this._user.set(null);
-    this._status.set('unauthenticated');
   }
 }
