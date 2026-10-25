@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { environment } from "../../environments/environment.production";
+import { environment } from "../../environments/environment";
 import { CurrentUser } from "./auth.store";
 import { delay, Observable } from "rxjs";
 

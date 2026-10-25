@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { AddBookDialogData, Book, BookSort } from "../models/book.model";
-import { environment } from "../../../environments/environment.production";
+import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 
 @Injectable({
