@@ -87,10 +87,11 @@ export class AuthStore {
 
         map(() => true),
 
-        catchError(() => {
+        catchError((err) => {
           this._user.set(null);
           this._userId.set(null);
           this._status.set('unauthenticated');
+          this._error.set('auth me error status: ' + err.status);
 
           return of(false);
         })
