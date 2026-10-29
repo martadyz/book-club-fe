@@ -14,7 +14,10 @@ export class BooksApi {
     `${environment.apiUrl}/books`;
 
   getBooks(sort: BookSort): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}?sort=${sort.field},${sort.direction}`);
+    return this.http.get<Book[]>(`${this.apiUrl}?sort=${sort.field},${sort.direction}`,
+      {
+        withCredentials: true
+      });
   }
 
   getBook(id: number): Observable<Book> {
