@@ -24,7 +24,7 @@ export class BooksStore {
   readonly booksCount = computed(
     () => this._books().length
   );
-  
+
   constructor() {
     toObservable(this._sort)
       .pipe(
@@ -34,8 +34,8 @@ export class BooksStore {
         }),
         switchMap(sort =>
           this.api.getBooks(sort).pipe(
-            catchError(() => {
-              this._error.set('Nie udało się pobrać książek');
+            catchError((err) => {
+              this._error.set('Nie udało się pobrać książek ' + err.status);
               return of([]);
             })
           )
