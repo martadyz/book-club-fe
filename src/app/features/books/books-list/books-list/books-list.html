@@ -17,7 +17,7 @@
     (sortChange)="bookStore.setSort($event)"></app-books-sort>
     <mat-accordion>
         @for (book of bookStore.books(); track book.id; let first = $first) {
-            <mat-expansion-panel [expanded]="first" (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
                 <mat-expansion-panel-header>
                 <mat-panel-title> 
                     <span class="book-title">{{ book.title }}</span> 
