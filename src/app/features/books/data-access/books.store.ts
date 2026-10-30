@@ -34,8 +34,8 @@ export class BooksStore {
         }),
         switchMap(sort =>
           this.api.getBooks(sort).pipe(
-            catchError((err) => {
-              this._error.set('Nie udało się pobrać książek ' + err.status);
+            catchError(() => {
+              this._error.set('Nie udało się pobrać książek');
               return of([]);
             })
           )
@@ -62,7 +62,7 @@ export class BooksStore {
         this._loading.set(false);
       },
       error: () => {
-        this._error.set('Could not load books');
+        this._error.set('Nie udało się pobrać książek');
         this._loading.set(false);
       }
     });
@@ -78,7 +78,7 @@ export class BooksStore {
         this._loading.set(false);
       },
       error: () => {
-        this._error.set('Could not add book');
+        this._error.set('Nie można dodać książki');
         this._loading.set(false);
       }
     });

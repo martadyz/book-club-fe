@@ -9,9 +9,6 @@
     @if (bookStore.error()) {
         <p>{{ bookStore.error() }}</p>
     }
-    
-   <div> {{ authStore.error() }} </div>
-   <div>{{ authStore.userId() }} </div>
 
     <div class="add-button">
         <button matButton="filled" color="primary" (click)="openAddBookDialog()">Dodaj książkę</button>
