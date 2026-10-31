@@ -25,4 +25,8 @@ export class BooksApi {
   addBook(book: AddBookDialogData): Observable<AddBookDialogData> {
     return this.http.post<AddBookDialogData>(`${this.apiUrl}`, book);
   }
+
+  updateBook(book: AddBookDialogData, id: number): Observable<AddBookDialogData> {
+    return this.http.put<AddBookDialogData>(`${this.apiUrl}/${id}`, book);
+  }
 }

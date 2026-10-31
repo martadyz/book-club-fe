@@ -16,7 +16,6 @@ import { BookRatingDialog } from "../book-rating-dialog/book-rating-dialog";
 import { RatingsStore } from "../../../ratings/data-access/ratings.store";
 import { AddBookDialog } from "../add-book-dialog/add-book-dialog";
 import '@angular/common/locales/global/pl';
-import { NumberInput } from "@angular/cdk/coercion";
 import { BooksSort } from '../books-sort/books-sort';
 
 @Component({
@@ -57,16 +56,32 @@ export class BooksListComponent implements OnInit {
 
   openAddBookDialog(): void {
      const dialogRef = this.dialog.open(AddBookDialog, {
-      data: { title: '', meetingDate: '' },
+      data: { title: '', meetingDate: '', author: '' },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.bookStore.addBook({
         title: result.title,
+        author: result.author,
         meetingDate:  formatDate(result.meetingDate, 'yyyy-MM-dd', 'pl-PL')
       }); 
     });
+  }
 
+  openEditBookDialog(book: Book, event: Event): void {
+    event.stopPropagation();
+    
+    const dialogRef = this.dialog.open(AddBookDialog, {
+      data: { title: book.title, meetingDate: book.meetingDate, author: book.author },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.bookStore.updateBook({
+        title: result.title,
+        author: result.author,
+        meetingDate:  formatDate(result.meetingDate, 'yyyy-MM-dd', 'pl-PL')
+      }, book.id); 
+    });
   }
 
   openRatingDialog(bookId: number, score: number, memberId?: number): void {
@@ -91,9 +106,7 @@ export class BooksListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.bookStore.loadBooks();
     this.membersStore.loadMembers();
-    console.log(this.authStore.isAdmin());
   }
 
 }

@@ -83,4 +83,20 @@ export class BooksStore {
       }
     });
   }
+
+  updateBook(book: AddBookDialogData, id: number): void {
+    this._loading.set(true);
+    this._error.set(null);
+
+    this.api.updateBook(book, id).subscribe({
+      next: books => {
+        this.loadBooks();
+        this._loading.set(false);
+      },
+      error: () => {
+        this._error.set('Nie można edytować książki');
+        this._loading.set(false);
+      }
+    });
+  }
 }

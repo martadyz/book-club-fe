@@ -20,8 +20,20 @@
             <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
                 <mat-expansion-panel-header>
                 <mat-panel-title> 
-                    <span class="book-title">{{ book.title }}</span> 
+            
+                    <span class="book-title">
+                        @if (authStore.isAdmin()) {
+                            <span>
+                                <mat-icon (click)="openEditBookDialog(book, $event)" aria-hidden="false" 
+                                        aria-label="Edit" fontIcon="edit">
+                                </mat-icon>
+                            </span>
+                        }
+                        
+                         <span>{{ book.title }}</span>
+                    </span> 
                     <span class="meeting-date">{{ book.meetingDate | date:'dd / MM / yyyy' }}</span>
+                    <span class="author">{{ book.author }}</span>
                     <div class="book-average-rating">
                         Średnia ocena: 
                         <span class="book-rating" 

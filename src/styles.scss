@@ -50,10 +50,17 @@ body {
   .book-title {
     font-size: 1.2rem;
     color: rgb(65, 97, 184); 
+    display: flex;
+    gap: 10px;
   }
   .meeting-date {
     font-size: 0.9rem;
     color: #666;
+  }
+  .author {
+    color: rgb(65, 97, 184); 
+    font-size: 0.9rem;
+    font-style: italic;
   }
 }
 .mat-expansion-panel-header {

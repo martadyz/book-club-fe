@@ -1,6 +1,7 @@
 export interface Book {
   id: number;
   title: string;
+  author?: string;
   meetingDate: string;
   averageRating: number;
   ratings: {
@@ -17,6 +18,7 @@ export interface BookRatingDialogData {
 export interface AddBookDialogData {
   title: string;
   meetingDate: string;
+  author?: string;
 }
 
 export type BookSortField = 

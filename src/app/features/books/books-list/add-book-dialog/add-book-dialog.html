@@ -5,6 +5,11 @@
     <input #titleModel="ngModel" matInput required type="text" [(ngModel)]="data.title" />
   </mat-form-field>
 
+   <mat-form-field class="full-width">
+    <mat-label>Autor</mat-label>
+    <input #authorModel="ngModel" matInput required type="text" [(ngModel)]="data.author" />
+  </mat-form-field>
+
   <mat-form-field class="full-width">
     <mat-label>Data spotkania</mat-label>
     <input #dateModel="ngModel" matInput [matDatepicker]="picker" [(ngModel)]="data.meetingDate" required>
@@ -16,5 +21,5 @@
 
 <mat-dialog-actions>
   <button matButton [disabled]="titleModel.invalid || dateModel.invalid" 
-  [mat-dialog-close]="{title: data.title, meetingDate: data.meetingDate}" cdkFocusInitial>Dodaj</button>
+  [mat-dialog-close]="{title: data.title, meetingDate: data.meetingDate, author: data.author}" cdkFocusInitial>Dodaj</button>
 </mat-dialog-actions>
