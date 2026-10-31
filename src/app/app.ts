@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { NavigationStore } from './core/navigation/navigation.store';
 import { AuthStore } from './core/auth/auth.store';
 import { Logout } from './features/auth/logout/logout';
+import { Topbar } from './features/topbar/topbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Logout],
+  imports: [RouterOutlet, Logout, Topbar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

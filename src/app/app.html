@@ -4,11 +4,12 @@
     </div>
 }
 
+@if (authStore.isAuthenticated()) {
+     <app-topbar></app-topbar>
+}
+
 <router-outlet /> 
 
-@if (authStore.isAuthenticated()) {
-     <app-logout></app-logout>
-}
 
 @if (authStore.loading()) {
     <div class="wrap-loader">

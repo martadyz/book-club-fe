@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 export interface CurrentUser {
   id: number;
-  username: string;
+  name: string;
   role: 'ROLE_USER' | 'ROLE_ADMIN';
 }
 

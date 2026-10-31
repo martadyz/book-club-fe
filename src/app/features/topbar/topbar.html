@@ -1,0 +1,10 @@
+@if (authStore.isAuthenticated()) {
+    <div class="topbar-container">
+        <div class="hello-user">Witaj {{authStore.user()?.name}} !</div>
+        <div class="logout">
+            <app-logout></app-logout>
+        </div>  
+    </div>
+  
+}
+
