@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core"; 
 import { environment } from "../../../environments/environment";
-import { Member } from "../models/member.model";
+import { Member, MemberSort } from "../models/member.model";
+import { shareReplay } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class MembersApi {
   private readonly apiUrl =
     `${environment.apiUrl}/members`;
 
-  getMembers() {
-    return this.http.get<Member[]>(this.apiUrl);
+  getMembers(sort: MemberSort) {
+    return this.http.get<Member[]>(`${this.apiUrl}?sort=${sort.field},${sort.direction}`).pipe(shareReplay());
   }
 
 }

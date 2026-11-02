@@ -1,6 +1,12 @@
 @if (authStore.isAuthenticated()) {
     <div class="topbar-container">
-        <div class="hello-user">Witaj {{authStore.user()?.name}} !</div>
+        <div class="hello-user">Witaj {{authStore.user()?.name}}!</div>
+        <a
+            class="menu"
+            [routerLink]="router.url.startsWith('/members') ? '/books' : '/members'"
+        >
+            {{ router.url.startsWith('/members') ? '/books' : '/members' }}
+        </a>
         <div class="logout">
             <app-logout></app-logout>
         </div>  

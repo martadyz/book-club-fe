@@ -19,5 +19,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/books/books-list/books-list/books-list')
         .then(m => m.BooksListComponent)
+  },
+  {
+    path: 'members',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/members/members-list/members-list')
+        .then(m => m.MembersListComponent)
   }
 ];

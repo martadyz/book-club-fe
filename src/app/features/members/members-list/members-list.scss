@@ -1,0 +1,17 @@
+:host {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.grid-list-custom {
+    display: flex;
+    gap: 10px;
+    flex-direction: column
+}
+
+.book-rating { 
+    font-weight: 500;
+}

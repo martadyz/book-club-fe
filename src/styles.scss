@@ -91,3 +91,52 @@ body {
 .full-width {
   width: 100%;
 }
+
+.bad {
+    color: #b91c1c;
+}
+
+.ok {
+    color: #be6c38;
+}
+
+.great {
+    
+    color: #b3ca5e;
+}
+
+.fan {
+   
+    color: #56972b;
+}
+
+.sort-container {
+    padding: 10px 5px;
+}
+
+.sort-header {
+    font-weight: 600;
+}
+
+.grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    padding: 12px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgb(15 23 42 / 6%);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        border-color: #c7d2fe;
+        box-shadow: 0 5px 12px rgb(15 23 42 / 10%);
+    }
+
+    p {
+        margin: 0;
+    }
+}

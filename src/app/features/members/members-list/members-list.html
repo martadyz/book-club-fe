@@ -1,0 +1,46 @@
+<h1 class="head-h1">Bookersi</h1>
+@if (membersStore.loading()) {
+    <div class="wrap-loader">
+        <img src="/assets/book_loader.svg" alt="Loading..." class="image-loader">
+    </div>
+}
+<app-members-sort [sort]="membersStore.sort()" 
+    (sortChange)="membersStore.setSort($event)"></app-members-sort>
+  <mat-accordion>
+        @for (member of membersStore.members(); track member.id; let first = $first) {
+            <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                <mat-expansion-panel-header>
+                <mat-panel-title> 
+            
+                    <span class="book-title">
+                         
+                        
+                         <span>{{ member.name }}</span>
+                    </span>
+                    <div class="book-average-rating">
+                        Średnia ocena: 
+                        <span class="book-rating" 
+                            [appRatingClass]="member.averageRating">
+                            {{ member.averageRating === 0 ? 'brak' : member.averageRating }}
+                        </span> <!-- -->
+                    </div>
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="grid-list-custom">
+                    @for (book of member.ratings; track book.id) {
+                        <!-- @let rating = getRating(book, member.id); -->
+                        <div class="grid-item">
+                            <p class="book-name">{{ book.bookTitle }}</p>
+                            <p class="book-rating" [appRatingClass]="book.score">{{ book.score }}</p>
+                            
+                                 
+                            
+                    </div>
+                    } <!-- -->
+                </div>
+                
+               
+            </mat-expansion-panel>      
+        }
+
+    </mat-accordion>  
